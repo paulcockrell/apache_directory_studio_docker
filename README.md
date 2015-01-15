@@ -17,3 +17,8 @@ $> ./start_image.sh
 ```
 $> docker run --rm -t -i ads bash -l
 ```
+
+== Connecting to LDAP server on a host machine
+
+When entering in the connection parameters, the docker host IP will always be
+172.17.42.1, default LDAP port is 389
