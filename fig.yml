@@ -1,0 +1,33 @@
+rabbitmq:
+  image: tutum/rabbitmq
+  environment:
+    RABBITMQ_PASS: password
+  expose:
+    - "5672"
+    - "5678"
+    - "15672"
+
+database:
+  image: mysql
+  environment:
+    MYSQL_ROOT_PASSWORD: 5tekapU3
+    MYSQL_DATABASE: mda_development
+
+gwre:
+  build: ./gwre
+  volumes:
+    - ./gwre/src/core:/home/app/core
+    - ./gwre/src/rails:/home/app/rails
+  ports:
+    - "80:80"
+    - "8088:8088/udp"
+    - "8089:8089/udp"
+    - "8090:8090/udp"
+    - "8092:8092/udp"
+    - "3000:3000/udp"
+    - "3001:3001/udp"
+  links:
+    - database:db
+    - rabbitmq
+  expose:
+    - "3000"
